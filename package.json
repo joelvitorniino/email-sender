@@ -1,0 +1,11 @@
+{
+  "name": "email-sender",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/joelvitorniino/email-sender.git",
+  "author": "joelvitorniino <joelprofessor13@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.8.0"
+  }
+}
