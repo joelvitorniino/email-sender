@@ -3,33 +3,46 @@ import nodemailer, { Transporter } from 'nodemailer';
 
 config();
 
+interface Sender {
+    name: string;
+};
+
+interface Receiver {
+    email: string | string[];
+};
+
+interface MailContent {
+    subject: string;
+    text: string;
+    html: string;
+}
+
 const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT) || 0,
+    service: 'Gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    secure: true,
 });
 
-const sender = {
-    name: 'Usuario Joel',
-    email: 'sender@teste.com'
+const sender: Sender = {
+    name: 'Test',
 };
 
-const receiver = {
-    email: 'bor@example.com'
+const receiver: Receiver = {
+    email: 'joelprofessor12@gmail.com'
 };
 
-const mailContent = {
-    subject: 'Hello, World!',
-    text: "It's work!",
-    html: "<strong>It's work</strong>"
+const mailContent: MailContent = {
+    subject: 'Hello, Bro!',
+    text: "Really?",
+    html: "<strong>Really bro?</strong>"
 }
 
-const sendMail = async (transporter: Transporter, sender: any, receiver: any | string[], mailContent: any) => {
+const sendMail = async (transporter: Transporter, sender: Sender, receiver: Receiver, mailContent: MailContent) => {
     const mail = await transporter.sendMail({
-        from: `"${sender.name}" ${sender.email}`,
+        from: sender.name,
         to: receiver.email,
         subject: mailContent.subject,
         text: mailContent.text,
@@ -37,7 +50,6 @@ const sendMail = async (transporter: Transporter, sender: any, receiver: any | s
     });
 
     console.log(`Email sended: ${mail.messageId}`);
-    console.log(`URL of Ethereal: ${nodemailer.getTestMessageUrl(mail)}`);
 };
 
 const mail = async () => {
