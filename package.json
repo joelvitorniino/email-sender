@@ -5,6 +5,9 @@
   "repository": "https://github.com/joelvitorniino/email-sender.git",
   "author": "joelvitorniino <joelprofessor13@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/app.ts"
+  },
   "dependencies": {
     "dotenv": "^16.0.3",
     "nodemailer": "^6.8.0"
